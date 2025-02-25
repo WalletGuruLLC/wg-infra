@@ -1,18 +1,40 @@
-aws_access_key        = "AKIA6GBMHYSPQLPDRT5G"
-aws_secret_key        = "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"
+# Wallet guru - wallet management system
+
+## Description
+
+Wallet guru is a wallet management system that allows users to create wallets, deposit money, withdraw money, transfer
+money to other wallets, and view their transaction history.
+
+## requirements
+
+- Terraform
+- AWS account
+- AWS CLI
+
+## How to deploy resources to AWS
+
+1. Clone the repository
+2. Navigate to the root directory of the project
+3. Create a new file called `local.tfvars` in the root directory of the project and add the following variables to the
+   file:
+
+```sh
+# this envs are example, you need change it for your own envs
+aws_access_key        = "AKIA6GB..."
+aws_secret_key        = "GeAqIRagq9..."
 aws_region            = "us-east-2"
-aws_account_id        = "975050359967"
+aws_account_id        = "975050359999"
 aws_access_key_shared = "AKIAQIJRSB2IJKGFXVAH"
-aws_secret_key_shared = "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"
+aws_secret_key_shared = "LlIK4Pe1F52Q..."
 aws_region_shared     = "us-east-2"
-public_key            = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4lYozqmOTyRXX01Fhtv00HWd3B/8YR32MAlAa0lM1YUi/tCdsBrDzbILwhuMo6w6zWhH/mBNoS8pIo6ec0YR+JWzVFME2jfrC3GirSlZz89Vo7MCA82BVP3swVahTUjJSe3ou1V2fFx1T3DNBxoLvvq+/pwb7PkR+4n0XkF0QR09kX9FPfpwLvr0kQc2TSBRLMErtWN6G/bDxra2ECTqbzTvFoDZ8jZ4MUBGjTTHdrF5QxFUIpOCHCJ8vsW+Bz+OFN+s/a9cQEn01Bmfpm0v20bEfvELjRxCuG8M7fEEjkSu8saETxcyLILx4OO79EvDB3On2PSW/O/2cNiabtmosXWSVBtOPAdNh2zT2DXwYhoD0VCeWqEuOJkjlYjZ/pHuDfhVaR6Y+qR/Jwg+QOh37xQeby2tAQpFAdf5cuAzpH5MHyYT5r0bH0LCexKfYbZQR1ahS8R4QtfGxeO0PJKRFUvwoDw/1sNUbUaKjyAnFwvNdVyoH8BVE7JrysYBhmpc= cristiandulcey@Cristians-MacBook-Pro.local"
+public_key            = "ssh-rsa AAAAB3NzaC1yc"
 namespaces = ["dev"]
 repos_list = ["backend-auth", "backend-notification", "frontend-admin", "backend-wallet","ws"]
 microservices_list = [
   {
     name             = "backend-auth"
     namespace        = "dev"
-    image            = "975050359967.dkr.ecr.us-east-2.amazonaws.com/backend-auth:development-latest"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-auth:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -26,7 +48,7 @@ microservices_list = [
   {
     name             = "backend-notification"
     namespace        = "dev"
-    image            = "975050359967.dkr.ecr.us-east-2.amazonaws.com/backend-notification:development-latest"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-notification:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -40,7 +62,7 @@ microservices_list = [
   {
     name             = "frontend-admin"
     namespace        = "dev"
-    image            = "975050359967.dkr.ecr.us-east-2.amazonaws.com/frontend-admin:development-latest"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/frontend-admin:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -54,7 +76,7 @@ microservices_list = [
   {
     name             = "backend-wallet"
     namespace        = "dev"
-    image            = "975050359967.dkr.ecr.us-east-2.amazonaws.com/backend-wallet:development-latest"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-wallet:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -68,7 +90,7 @@ microservices_list = [
   {
     name             = "backend-ws"
     namespace        = "dev"
-    image            = "975050359967.dkr.ecr.us-east-2.amazonaws.com/ws:development-latest"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/ws:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -1130,4 +1152,48 @@ s3_buckets = [
 ]
 create_domain                  = true
 zone_id                        = "Z00522293EO3PH1CIDJ"
-email_configuration_source_arn = "arn:aws:ses:us-east-2:975050359967:identity/walletguru.co"
+email_configuration_source_arn = "arn:aws:ses:us-east-2:975050359999:identity/walletguru.co"
+```
+
+### Envs
+
+| Name of env                    | Description                                                                                                              | Instrucction                                                                                                                                                                                                                                                                                                                                                             | Required | Default                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| aws_access_key                 | AWS Access Key                                                                                                           | Go to aws iam and create a new user with name **terraform** and set permission **AdministratorAccess**, in security credentials crea a new access key with Command Line Interface (CLI) option, now you have this env **Access key**                                                                                                                                     | Yes      | AKIA6GB...                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| aws_secret_key                 | AWS Secret Key                                                                                                           | Go to aws iam and create a new user with name **terraform** and set permission **AdministratorAccess**, in security credentials crea a new access key with Command Line Interface (CLI) option, now you have this env **Secret access key**                                                                                                                              | Yes      | GeAqIRagq9...                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| aws_region                     | AWS Region to deploy resources                                                                                           | Set region to deploy resources                                                                                                                                                                                                                                                                                                                                           | Yes      | us-east-2                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| aws_account_id                 | AWS Account ID                                                                                                           | Get account id in the next link https://us-east-1.console.aws.amazon.com/billing/home?region=us-east-2#/account                                                                                                                                                                                                                                                          | Yes      | 975050359999                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| aws_access_key_shared          | AWS Access Key its used only for access to secret manager, can use **aws_access_key** if you use the same account of aws | Go to aws iam and create a new user with name **terraform** and set permission **AdministratorAccess**, in security credentials crea a new access key with Command Line Interface (CLI) option, now you have this env **Access key**                                                                                                                                     | Yes      | AKIA6GB...                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| aws_secret_key_shared          | AWS Secret Key its used only for access to secret manager, can use **aws_secret_key** if you use the same account of aws | Go to aws iam and create a new user with name **terraform** and set permission **AdministratorAccess**, in security credentials crea a new access key with Command Line Interface (CLI) option, now you have this env **Secret access key**                                                                                                                              | Yes      | GeAqIRagq9...                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| aws_region_shared              | AWS Region to deploy secret manager                                                                                      | Set region to deploy resources                                                                                                                                                                                                                                                                                                                                           | Yes      | us-east-2                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| public_key                     | Public key for entry in any instance of ec2                                                                              | Paste your ssh public key                                                                                                                                                                                                                                                                                                                                                | Yes      | ssh-rsa AAAAB3NzaC1y                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| namespaces                     | List of namespace for create resources in kubernetes                                                                     | Set a list with nameserver for create in k8s                                                                                                                                                                                                                                                                                                                             | No       | ["local"]                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| repos_list                     | List of repositories create in ECR (elastic container registry)                                                          | Set a list with name of repositories for create in ECR                                                                                                                                                                                                                                                                                                                   | No       | ["backend-auth", "backend-notification", "frontend-admin", "backend-wallet","ws]                                                                                                                                                                                                                                                                                                                                                        |
+| microservices_list             | List of objects for create deployment, pods and service in kubernetes                                                    | Set a list with object configuration of microservices used in kubernetes. The name is the name of the name of the resource in k8s, the namespace is the namespace used for deploy the resoources, the image is the image used for deploy pods, the port and node_port is the port when microservice run, replicas is the number of replicas of you used,                 | No       | ```[{name = "backend-auth"namespace= "dev"image= "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-auth:development-latest"port = 3000replicas = 1node_port= 3000type_port= "ClusterIP"commands = []commands_job = []"var_envs" = []"var_envs_job" = []apply_migrations = false},]```                                                                                                                                               |
+| traefik_envs                   | List of subdomains used in your cluster                                                                                  | Set a list with object configuration of subdomains used in kubernetes, The domain is the subdomain used with your microservice, the namespace is the namespace used for deploy the resoource, service_name is the name of the service used for expose your microservice, the port is the port when microservice run, and traefik_name is the name used for this resource | No       | ```[{domain       = "dev.auth.walletguru.co" namespace    = "dev" service_name = "backend-auth" service_port = "3000" traefik_name = "auth"},```                                                                                                                                                                                                                                                                                        |
+| records_list                   | List of records in Route53 service of aws                                                                                | Set a list with object configuration of records of subdomains in route53 service of aws, the name is the subdomain name, type is the type of subdomain, records is the list of values for redirect subdomain                                                                                                                                                             | No       | ```[ { name = "dev.admin.walletguru.co" type = "CNAME" records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"] }, ]```                                                                                                                                                                                                                                                                                     |
+| dynamo_tables                  | List of tables created in DynamoDb service of aws                                                                        | Set a list with object configuration of tables in DynamoDb, name is the name of table, billing_mode is the type of billing of the table, read_capacity and write_capacity is the capacity of the table for read and write objects                                                                                                                                        | No       | ```[ { name                        = "Attempts" billing_mode                = "PROVISIONED" read_capacity               = 5 write_capacity              = 5 hash_key                    = "Id" range_key                   = "" deletion_protection_enabled = true, attributes = [   {     name = "Id"     type = "S"   } ], ttl = [], global_secondary_index = [], tags = {   Name        = "Attempts"   Environment = "dev" } }, ]``` |
+| name_queue                     | Name of the queue used in SQS service of aws                                                                             | Set a name of SQS used for notification                                                                                                                                                                                                                                                                                                                                  | Yes      | paystreme-notifications-local                                                                                                                                                                                                                                                                                                                                                                                                           |
+| s3_buckets                     | List of names of buclkets created for save files                                                                         | Set a list with names of s3 buckets                                                                                                                                                                                                                                                                                                                                      | Yes      | ```{ name = "walletguru-dev"}]```                                                                                                                                                                                                                                                                                                                                                                                                       |
+| create_domain                  | Bool for create aws_route53_zone in route53 service                                                                      | Set true if you need create aws_route53_zone                                                                                                                                                                                                                                                                                                                             | Yes      | False                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| zone_id                        | Zone id of aws_route53_zone create                                                                                       | Set id of aws_route53_zone for send emails                                                                                                                                                                                                                                                                                                                               | Yes      | Z00522293EO3PH12345                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| email_configuration_source_arn | Id of ses for send emails                                                                                                | Set id of ses configuration for send emails                                                                                                                                                                                                                                                                                                                              | Yes      | arn:aws:ses:us-east-2:975050359999:identity/walletguru.co                                                                                                                                                                                                                                                                                                                                                                               |
+
+Note: before run terraform commands, you need push of the image to ecr and create the secret in secret manager with
+the name **walletguru-local** and the key **.env** with you use in the microservices.
+
+4. Run the following commands:
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+5. Uncomment modules ecr_credentials, traefik, traefik-ingress in main.tf and run the following commands:
+
+```bash
+terraform apply
+```
+
+6. After the resources are created, you can access the resources created in the AWS console and deploy microservices.

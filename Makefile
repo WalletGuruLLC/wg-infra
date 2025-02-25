@@ -13,3 +13,7 @@ stg:
 prd:
 	terraform workspace select prd
 	terraform apply --var-file=prd.tfvars
+
+local:
+	terraform workspace select local
+	terraform apply --var-file=local.tfvars

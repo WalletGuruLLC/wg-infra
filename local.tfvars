@@ -1,18 +1,19 @@
-aws_access_key        = "AKIAW3MEBLSPMM3M6PHU"
-aws_secret_key        = "JxOqgr8n0Aoi6v+ruKP0sjTaD7zA4eASOEBG9mBG"
+# this envs are example, you need change it for your own envs
+aws_access_key        = "AKIAWNHTHA5CHHFZK3HW"
+aws_secret_key        = "gA9AU6ax3jeyKbneFAmt8iEBTXFvrQQaMmQuHYMg"
 aws_region            = "us-east-2"
-aws_account_id        = "471112703134"
-aws_access_key_shared = "AKIAQIJRSB2IJKGFXVAH"
-aws_secret_key_shared = "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"
+aws_account_id        = "440744216388"
+aws_access_key_shared = "AKIAWNHTHA5CHHFZK3HW"
+aws_secret_key_shared = "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"
 aws_region_shared     = "us-east-2"
-public_key            = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4lYozqmOTyRXX01Fhtv00HWd3B/8YR32MAlAa0lM1YUi/tCdsBrDzbILwhuMo6w6zWhH/mBNoS8pIo6ec0YR+JWzVFME2jfrC3GirSlZz89Vo7MCA82BVP3swVahTUjJSe3ou1V2fFx1T3DNBxoLvvq+/pwb7PkR+4n0XkF0QR09kX9FPfpwLvr0kQc2TSBRLMErtWN6G/bDxra2ECTqbzTvFoDZ8jZ4MUBGjTTHdrF5QxFUIpOCHCJ8vsW+Bz+OFN+s/a9cQEn01Bmfpm0v20bEfvELjRxCuG8M7fEEjkSu8saETxcyLILx4OO79EvDB3On2PSW/O/2cNiabtmosXWSVBtOPAdNh2zT2DXwYhoD0VCeWqEuOJkjlYjZ/pHuDfhVaR6Y+qR/Jwg+QOh37xQeby2tAQpFAdf5cuAzpH5MHyYT5r0bH0LCexKfYbZQR1ahS8R4QtfGxeO0PJKRFUvwoDw/1sNUbUaKjyAnFwvNdVyoH8BVE7JrysYBhmpc= cristiandulcey@Cristians-MacBook-Pro.local"
-namespaces = ["qa"]
-repos_list = ["backend-auth", "backend-notification", "frontend-admin", "backend-wallet", "backend-codes", "ws"]
+public_key            = "ssh-rsa AAAAB3NzaC1yc"
+namespaces = ["local"]
+repos_list = ["backend-auth", "backend-notification", "frontend-admin", "backend-wallet","ws"]
 microservices_list = [
   {
     name             = "backend-auth"
-    namespace        = "qa"
-    image            = "471112703134.dkr.ecr.us-east-2.amazonaws.com/backend-auth:qa-latest"
+    namespace        = "local"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-auth:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -25,8 +26,8 @@ microservices_list = [
   },
   {
     name             = "backend-notification"
-    namespace        = "qa"
-    image            = "471112703134.dkr.ecr.us-east-2.amazonaws.com/backend-notification:qa-latest"
+    namespace        = "local"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-notification:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -39,8 +40,8 @@ microservices_list = [
   },
   {
     name             = "frontend-admin"
-    namespace        = "qa"
-    image            = "471112703134.dkr.ecr.us-east-2.amazonaws.com/frontend-admin:qa-latest"
+    namespace        = "local"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/frontend-admin:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -53,22 +54,8 @@ microservices_list = [
   },
   {
     name             = "backend-wallet"
-    namespace        = "qa"
-    image            = "471112703134.dkr.ecr.us-east-2.amazonaws.com/backend-wallet:qa-latest"
-    port             = 3000
-    replicas         = 1
-    node_port        = 3000
-    type_port        = "ClusterIP"
-    commands = []
-    commands_job = []
-    "var_envs" = []
-    "var_envs_job" = []
-    apply_migrations = false
-  },
-  {
-    name             = "backend-codes"
-    namespace        = "qa"
-    image            = "471112703134.dkr.ecr.us-east-2.amazonaws.com/backend-codes:main-latest"
+    namespace        = "local"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-wallet:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -81,8 +68,8 @@ microservices_list = [
   },
   {
     name             = "backend-ws"
-    namespace        = "qa"
-    image            = "471112703134.dkr.ecr.us-east-2.amazonaws.com/ws:qa-latest"
+    namespace        = "local"
+    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/ws:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000
@@ -96,85 +83,78 @@ microservices_list = [
 ]
 traefik_envs = [
   {
-    domain       = "qa.auth.walletguru.co"
-    namespace    = "qa"
+    domain       = "dev.auth.walletguru.co"
+    namespace    = "local"
     service_name = "backend-auth"
     service_port = "3000"
     traefik_name = "auth"
   },
   {
-    domain       = "qa.notification.walletguru.co"
-    namespace    = "qa"
+    domain       = "dev.notification.walletguru.co"
+    namespace    = "local"
     service_name = "backend-notification"
     service_port = "3000"
     traefik_name = "notification"
   },
   {
-    domain       = "qa.admin.walletguru.co"
-    namespace    = "qa"
+    domain       = "dev.admin.walletguru.co"
+    namespace    = "local"
     service_name = "frontend-admin"
     service_port = "3000"
     traefik_name = "admin"
   },
   {
-    domain       = "qa.wallet.walletguru.co"
-    namespace    = "qa"
+    domain       = "dev.wallet.walletguru.co"
+    namespace    = "local"
     service_name = "backend-wallet"
     service_port = "3000"
     traefik_name = "wallet"
   },
   {
-    domain       = "codes.walletguru.co"
-    namespace    = "qa"
-    service_name = "backend-codes"
-    service_port = "3000"
-    traefik_name = "codes"
-  },
-  {
-    domain       = "qa.rafiki.walletguru.co"
+    domain       = "dev.rafiki.walletguru.co"
     namespace    = "default"
     service_name = "rafiki-rafiki-frontend"
     service_port = "3010"
     traefik_name = "rafiki-frontend"
   },
   {
-    domain       = "qa.graphql.walletguru.co"
+    domain       = "dev.graphql.walletguru.co"
     namespace    = "default"
     service_name = "rafiki-rafiki-backend"
     service_port = "3001"
     traefik_name = "graphql-backend"
   },
   {
-    domain       = "qa.rafiki-auth.walletguru.co"
+    domain       = "dev.rafiki-auth.walletguru.co"
     namespace    = "default"
     service_name = "rafiki-rafiki-auth"
     service_port = "3006"
     traefik_name = "rafiki-auth"
   },
   {
-    domain       = "qa.walletguru.me"
+    domain       = "dev.walletguru.me"
     namespace    = "default"
     service_name = "rafiki-rafiki-backend"
     service_port = "80"
     traefik_name = "rafiki-open-payments"
   },
   {
-    domain       = "qa.interaction.walletguru.co"
+    domain       = "dev.interaction.walletguru.co"
     namespace    = "default"
     service_name = "rafiki-rafiki-auth"
     service_port = "3009"
     traefik_name = "rafiki-interaction"
   },
   {
-    domain       = "qa.mock.walletguru.co"
+    domain       = "dev.mock.walletguru.co"
     namespace    = "default"
     service_name = "rafiki-rafiki-mock"
     service_port = "3030"
     traefik_name = "rafiki-mock"
   },
   {
-    domain       = "qa.websocket.walletguru.co"
-    namespace    = "qa"
+    domain       = "dev.websocket.walletguru.co"
+    namespace    = "local"
     service_name = "backend-ws"
     service_port = "3000"
     traefik_name = "ws"
@@ -182,66 +162,112 @@ traefik_envs = [
 ]
 records_list = [
   {
-    name = "qa.admin.walletguru.co"
+    name = "dev.admin.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "qa.auth.walletguru.co"
+    name = "dev.auth.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "qa.notification.walletguru.co"
+    name = "dev.notification.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "qa.wallet.walletguru.co"
+    name = "vftimymc7xgnksuvqe7glwbcfjvutsz7._domainkey.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["vftimymc7xgnksuvqe7glwbcfjvutsz7.dkim.amazonses.com"]
   },
   {
-    name = "codes.walletguru.co"
+    name = "ugcymohpz7tvyjr5zcsymxsamw55stib._domainkey.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
-  },
-   {
-    name = "qa.rafiki.walletguru.co"
-    type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["ugcymohpz7tvyjr5zcsymxsamw55stib.dkim.amazonses.com"]
   },
   {
-    name = "qa.graphql.walletguru.co"
+    name = "shm3eq3wwx3ivumsiyfflual6qcl67yj._domainkey.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["shm3eq3wwx3ivumsiyfflual6qcl67yj.dkim.amazonses.com"]
   },
   {
-    name = "qa.rafiki-auth.walletguru.co"
-    type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    name = "_dmarc.walletguru.co"
+    type = "TXT"
+    records = ["v=DMARC1; p=none;"]
   },
   {
-    name = "qa.walletguru.me"
+    name = "dev.wallet.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
+  },
+  {
+    name = "44mh5smaunivxhr63elcbyi57l7l4lwi._domainkey.walletguru.co"
+    type = "CNAME"
+    records = ["44mh5smaunivxhr63elcbyi57l7l4lwi.dkim.amazonses.com"]
+  },
+  {
+    name = "czzabqsuluhcffeu4jwnvmxoe3gwobls._domainkey.walletguru.co"
+    type = "CNAME"
+    records = ["czzabqsuluhcffeu4jwnvmxoe3gwobls.dkim.amazonses.com"]
+  },
+  {
+    name = "o5v7iuqf6dvyv23b6qwlav3yhrhnqd36._domainkey.walletguru.co"
+    type = "CNAME"
+    records = ["o5v7iuqf6dvyv23b6qwlav3yhrhnqd36.dkim.amazonses.com"]
+  },
+  {
+    name = "42m4w6dscge274szhjoq2u5noc3bdyzx._domainkey.walletguru.co"
+    type = "CNAME"
+    records = ["42m4w6dscge274szhjoq2u5noc3bdyzx.dkim.amazonses.com"]
+  },
+  {
+    name = "eicaqbslgkarw4ip4drlikgliva6qahj._domainkey.walletguru.co"
+    type = "CNAME"
+    records = ["eicaqbslgkarw4ip4drlikgliva6qahj.dkim.amazonses.com"]
+  },
+  {
+    name = "5ktwxsaan2cfxvfhv4t5mq525n4v24qj._domainkey.walletguru.co"
+    type = "CNAME"
+    records = ["5ktwxsaan2cfxvfhv4t5mq525n4v24qj.dkim.amazonses.com"]
+  },
+  {
+    name = "dev.rafiki.walletguru.co"
+    type = "CNAME"
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
+  },
+  {
+    name = "dev.graphql.walletguru.co"
+    type = "CNAME"
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
+  },
+  {
+    name = "dev.rafiki-auth.walletguru.co"
+    type = "CNAME"
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
+  },
+  {
+    name = "dev.walletguru.me"
+    type = "CNAME"
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
     zone_id_shared = "Z005616523M0XVD03LD0M"
   },
   {
-    name = "qa.interaction.walletguru.co"
+    name = "dev.interaction.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "qa.mock.walletguru.co"
+    name = "dev.mock.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "qa.websocket.walletguru.co"
+    name = "dev.websocket.walletguru.co"
     type = "CNAME"
-    records = ["a94705f6350834a51a99e08b95236f24-1640821681.us-east-2.elb.amazonaws.com"]
+    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
+
 ]
 dynamo_tables = [
   {
@@ -262,7 +288,7 @@ dynamo_tables = [
     global_secondary_index = [],
     tags = {
       Name        = "Attempts"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -297,7 +323,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Modules"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -346,7 +372,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Otps"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -367,7 +393,7 @@ dynamo_tables = [
     global_secondary_index = [],
     tags = {
       Name        = "Providers"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -402,7 +428,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Roles"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -463,7 +489,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Users"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -537,7 +563,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Wallets"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -572,7 +598,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Settings"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -604,7 +630,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "StatusCode"
-      Environment = "dev"
+      Environment = "local"
     }
   },
   {
@@ -651,7 +677,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "PaymentParameters"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -682,7 +708,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "TimeIntervals"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -726,7 +752,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "FeeConfigurations"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -748,7 +774,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Rates"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -805,7 +831,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "SocketKeys"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -849,7 +875,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "NotificationSettings"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -919,7 +945,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "UserIncoming"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -1002,7 +1028,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "UserIncoming"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -1023,7 +1049,7 @@ dynamo_tables = [
     global_secondary_index = [],
     tags = {
       Name        = "WebSocketActions"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -1058,7 +1084,7 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "ClearPayments"
-      Environment = "qa"
+      Environment = "local"
     }
   },
   {
@@ -1093,16 +1119,16 @@ dynamo_tables = [
     ],
     tags = {
       Name        = "Refunds"
-      Environment = "qa"
+      Environment = "local"
     }
   },
 ]
-name_queue = "paystreme-notifications-qa"
+name_queue = "paystreme-notifications-development"
 s3_buckets = [
   {
-    name = "walletguru-qa"
+    name = "walletguru-local"
   }
 ]
 create_domain                  = false
 zone_id                        = "Z00522293EO3PH1CIDJ"
-email_configuration_source_arn = "arn:aws:ses:us-east-2:471112703134:identity/walletguru.co"
+email_configuration_source_arn = "arn:aws:ses:us-east-2:975050359999:identity/walletguru.co"

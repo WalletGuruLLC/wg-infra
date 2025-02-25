@@ -178,6 +178,19 @@ module "vpc" {
   }
 }
 
+#### repos images docker
+
+module "repositories" {
+  source = "./modules/ecr_repository"
+  for_each = toset(var.repos_list)
+  name   = each.key
+}
+#### repos images docker
+
+##### NOTE comment this block if you are not created the cluster with the module eks
+
+# Uncomment the following block to create the cluster with the module eks
+#### kubernetes module
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "20.23.0"
@@ -206,20 +219,9 @@ module "eks" {
     }
   }
 }
-
 #### kubernetes module
 
-#### repos images docker
-
-module "repositories" {
-  source = "./modules/ecr_repository"
-  for_each = toset(var.repos_list)
-  name   = each.key
-}
-#### repos images docker
-
 #### create namespaces k8s
-
 resource "kubernetes_namespace" "resources_name" {
   depends_on = [module.eks]
   for_each = toset(keys({for i, r in var.namespaces :  i => r}))
@@ -229,24 +231,7 @@ resource "kubernetes_namespace" "resources_name" {
 }
 #### create namespaces k8s
 
-### renew ecr credentials
-
-module "ecr_credentials" {
-  depends_on = [module.eks]
-  source         = "./modules/ecr_credentials"
-  for_each       = {for i, r in var.namespaces :  i => r}
-  namespace      = each.value
-  name_secret    = "docker-cfg"
-  aws_access_key = var.aws_access_key
-  aws_region     = var.aws_region
-  aws_secret_key = var.aws_secret_key
-  aws_account_id = var.aws_account_id
-}
-
-#### renew ecr credentials
-
 #### microservices
-
 module "microservices" {
   depends_on = [module.eks, kubernetes_namespace.resources_name]
   source           = "./modules/microservices"
@@ -264,48 +249,95 @@ module "microservices" {
   var_envs_job     = each.value.var_envs_job
   apply_migrations = each.value.apply_migrations
 }
-
 #### microservices
 
+### renew ecr credentials
+# module "ecr_credentials" {
+#   depends_on = [module.eks, kubernetes_namespace.resources_name]
+#   source         = "./modules/ecr_credentials"
+#   for_each       = {for i, r in var.namespaces :  i => r}
+#   namespace      = each.value
+#   name_secret    = "docker-cfg"
+#   aws_access_key = var.aws_access_key
+#   aws_region     = var.aws_region
+#   aws_secret_key = var.aws_secret_key
+#   aws_account_id = var.aws_account_id
+# }
+#### renew ecr credentials
+
+
 
 #### traefik
-module "traefik" {
-  depends_on = [module.eks]
-  source      = "aigisuk/traefik/kubernetes"
-  version     = "0.2.1"
-  values_file = "traefik-values.yaml"
-}
-
-resource "kubernetes_service_v1" "traefik-dashboard" {
-  depends_on = [module.traefik]
-  metadata {
-    name      = "traefik-dashboard"
-    namespace = "traefik"
-  }
-  spec {
-    selector = {
-      "app.kubernetes.io/name" = "traefik"
-    }
-    port {
-      name        = "web"
-      port        = 9000
-      target_port = 9000
-    }
-  }
-}
-
-module "traefik-ingress" {
-  depends_on = [module.traefik]
-  source       = "./modules/traefik"
-  for_each     = {for each in var.traefik_envs : each.domain => each}
-  domain       = each.value.domain
-  namespace    = each.value.namespace
-  service_name = each.value.service_name
-  service_port = each.value.service_port
-  traefik_name = each.value.traefik_name
-}
+# module "traefik" {
+#   depends_on = [module.eks]
+#   source      = "aigisuk/traefik/kubernetes"
+#   version     = "0.2.1"
+#   values_file = "traefik-values.yaml"
+# }
+#
+# resource "kubernetes_service_v1" "traefik-dashboard" {
+#   depends_on = [module.traefik]
+#   metadata {
+#     name      = "traefik-dashboard"
+#     namespace = "traefik"
+#   }
+#   spec {
+#     selector = {
+#       "app.kubernetes.io/name" = "traefik"
+#     }
+#     port {
+#       name        = "web"
+#       port        = 9000
+#       target_port = 9000
+#     }
+#   }
+# }
+#
+# module "traefik-ingress" {
+#   depends_on = [module.traefik]
+#   source       = "./modules/traefik"
+#   for_each     = {for each in var.traefik_envs : each.domain => each}
+#   domain       = each.value.domain
+#   namespace    = each.value.namespace
+#   service_name = each.value.service_name
+#   service_port = each.value.service_port
+#   traefik_name = each.value.traefik_name
+# }
+# Uncomment the following block to create the cluster with the module eks
 
 #### traefik
+
+# Uncomment the following block to create the vpn client
+# resource "aws_subnet" "vpn" {
+#   vpc_id     = module.vpc.vpc_id
+#   cidr_block = "10.0.8.0/22"
+#   tags = {
+#     Name = "VPN subnet for client connections"
+#   }
+# }
+#
+# module "vpn-client" {
+#   depends_on = [aws_subnet.vpn]
+#   source                = "babicamir/vpn-client/aws"
+#   version               = "1.0.1"
+#   organization_name     = "wallet guru"
+#   project-name          = "wg"
+#   environment = var.namespaces[0]
+#   # Network information
+#   vpc_id                = module.vpc.vpc_id
+#   subnet_id             = aws_subnet.vpn.id
+#   client_cidr_block     = "10.0.0.0/22" # It must be different from the primary VPC CIDR
+#   # VPN config options
+#   split_tunnel = "true" # or false
+#   vpn_inactive_period = "300" # seconds
+#   session_timeout_hours = "8"
+#   logs_retention_in_days = "7"
+#   # List of users to be created
+#   aws-vpn-client-list = ["root", "terraform", "daniel.gomez"] #Do not delete "root" user!
+# }
+# Uncomment the following block to create the vpn client
+
+##### NOTE comment this block if you are not created the cluster with the module eks
 
 #### Domain
 
@@ -387,30 +419,3 @@ module "s3" {
 # }
 
 
-resource "aws_subnet" "vpn" {
-  vpc_id     = module.vpc.vpc_id
-  cidr_block = "10.0.8.0/22"
-  tags = {
-    Name = "VPN subnet for client connections"
-  }
-}
-
-module "vpn-client" {
-  depends_on = [aws_subnet.vpn]
-  source                = "babicamir/vpn-client/aws"
-  version               = "1.0.1"
-  organization_name     = "wallet guru"
-  project-name          = "wg"
-  environment = var.namespaces[0]
-  # Network information
-  vpc_id                = module.vpc.vpc_id
-  subnet_id             = aws_subnet.vpn.id
-  client_cidr_block     = "10.0.0.0/22" # It must be different from the primary VPC CIDR
-  # VPN config options
-  split_tunnel = "true" # or false
-  vpn_inactive_period = "300" # seconds
-  session_timeout_hours = "8"
-  logs_retention_in_days = "7"
-  # List of users to be created
-  aws-vpn-client-list = ["root", "terraform", "daniel.gomez"] #Do not delete "root" user!
-}

@@ -10,6 +10,7 @@ money to other wallets, and view their transaction history.
 - Terraform
 - AWS account
 - AWS CLI
+- YOUR_DOMAIN
 
 ## How to deploy resources to AWS
 
@@ -104,49 +105,49 @@ microservices_list = [
 ]
 traefik_envs = [
   {
-    domain       = "dev.auth.walletguru.co"
+    domain       = "dev.auth.YOUR_DOMAIN"
     namespace    = "dev"
     service_name = "backend-auth"
     service_port = "3000"
     traefik_name = "auth"
   },
   {
-    domain       = "dev.notification.walletguru.co"
+    domain       = "dev.notification.YOUR_DOMAIN"
     namespace    = "dev"
     service_name = "backend-notification"
     service_port = "3000"
     traefik_name = "notification"
   },
   {
-    domain       = "dev.admin.walletguru.co"
+    domain       = "dev.admin.YOUR_DOMAIN"
     namespace    = "dev"
     service_name = "frontend-admin"
     service_port = "3000"
     traefik_name = "admin"
   },
   {
-    domain       = "dev.wallet.walletguru.co"
+    domain       = "dev.wallet.YOUR_DOMAIN"
     namespace    = "dev"
     service_name = "backend-wallet"
     service_port = "3000"
     traefik_name = "wallet"
   },
   {
-    domain       = "dev.rafiki.walletguru.co"
+    domain       = "dev.rafiki.YOUR_DOMAIN"
     namespace    = "default"
     service_name = "rafiki-rafiki-frontend"
     service_port = "3010"
     traefik_name = "rafiki-frontend"
   },
   {
-    domain       = "dev.graphql.walletguru.co"
+    domain       = "dev.graphql.YOUR_DOMAIN"
     namespace    = "default"
     service_name = "rafiki-rafiki-backend"
     service_port = "3001"
     traefik_name = "graphql-backend"
   },
   {
-    domain       = "dev.rafiki-auth.walletguru.co"
+    domain       = "dev.rafiki-auth.YOUR_DOMAIN"
     namespace    = "default"
     service_name = "rafiki-rafiki-auth"
     service_port = "3006"
@@ -160,21 +161,21 @@ traefik_envs = [
     traefik_name = "rafiki-open-payments"
   },
   {
-    domain       = "dev.interaction.walletguru.co"
+    domain       = "dev.interaction.YOUR_DOMAIN"
     namespace    = "default"
     service_name = "rafiki-rafiki-auth"
     service_port = "3009"
     traefik_name = "rafiki-interaction"
   },
   {
-    domain       = "dev.mock.walletguru.co"
+    domain       = "dev.mock.YOUR_DOMAIN"
     namespace    = "default"
     service_name = "rafiki-rafiki-mock"
     service_port = "3030"
     traefik_name = "rafiki-mock"
   },
   {
-    domain       = "dev.websocket.walletguru.co"
+    domain       = "dev.websocket.YOUR_DOMAIN"
     namespace    = "dev"
     service_name = "backend-ws"
     service_port = "3000"
@@ -183,87 +184,87 @@ traefik_envs = [
 ]
 records_list = [
   {
-    name = "dev.admin.walletguru.co"
+    name = "dev.admin.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "dev.auth.walletguru.co"
+    name = "dev.auth.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "dev.notification.walletguru.co"
+    name = "dev.notification.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "vftimymc7xgnksuvqe7glwbcfjvutsz7._domainkey.walletguru.co"
+    name = "vftimymc7xgnksuvqe7glwbcfjvutsz7._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["vftimymc7xgnksuvqe7glwbcfjvutsz7.dkim.amazonses.com"]
   },
   {
-    name = "ugcymohpz7tvyjr5zcsymxsamw55stib._domainkey.walletguru.co"
+    name = "ugcymohpz7tvyjr5zcsymxsamw55stib._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["ugcymohpz7tvyjr5zcsymxsamw55stib.dkim.amazonses.com"]
   },
   {
-    name = "shm3eq3wwx3ivumsiyfflual6qcl67yj._domainkey.walletguru.co"
+    name = "shm3eq3wwx3ivumsiyfflual6qcl67yj._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["shm3eq3wwx3ivumsiyfflual6qcl67yj.dkim.amazonses.com"]
   },
   {
-    name = "_dmarc.walletguru.co"
+    name = "_dmarc.YOUR_DOMAIN"
     type = "TXT"
     records = ["v=DMARC1; p=none;"]
   },
   {
-    name = "dev.wallet.walletguru.co"
+    name = "dev.wallet.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "44mh5smaunivxhr63elcbyi57l7l4lwi._domainkey.walletguru.co"
+    name = "44mh5smaunivxhr63elcbyi57l7l4lwi._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["44mh5smaunivxhr63elcbyi57l7l4lwi.dkim.amazonses.com"]
   },
   {
-    name = "czzabqsuluhcffeu4jwnvmxoe3gwobls._domainkey.walletguru.co"
+    name = "czzabqsuluhcffeu4jwnvmxoe3gwobls._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["czzabqsuluhcffeu4jwnvmxoe3gwobls.dkim.amazonses.com"]
   },
   {
-    name = "o5v7iuqf6dvyv23b6qwlav3yhrhnqd36._domainkey.walletguru.co"
+    name = "o5v7iuqf6dvyv23b6qwlav3yhrhnqd36._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["o5v7iuqf6dvyv23b6qwlav3yhrhnqd36.dkim.amazonses.com"]
   },
   {
-    name = "42m4w6dscge274szhjoq2u5noc3bdyzx._domainkey.walletguru.co"
+    name = "42m4w6dscge274szhjoq2u5noc3bdyzx._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["42m4w6dscge274szhjoq2u5noc3bdyzx.dkim.amazonses.com"]
   },
   {
-    name = "eicaqbslgkarw4ip4drlikgliva6qahj._domainkey.walletguru.co"
+    name = "eicaqbslgkarw4ip4drlikgliva6qahj._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["eicaqbslgkarw4ip4drlikgliva6qahj.dkim.amazonses.com"]
   },
   {
-    name = "5ktwxsaan2cfxvfhv4t5mq525n4v24qj._domainkey.walletguru.co"
+    name = "5ktwxsaan2cfxvfhv4t5mq525n4v24qj._domainkey.YOUR_DOMAIN"
     type = "CNAME"
     records = ["5ktwxsaan2cfxvfhv4t5mq525n4v24qj.dkim.amazonses.com"]
   },
   {
-    name = "dev.rafiki.walletguru.co"
+    name = "dev.rafiki.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "dev.graphql.walletguru.co"
+    name = "dev.graphql.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "dev.rafiki-auth.walletguru.co"
+    name = "dev.rafiki-auth.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
@@ -274,17 +275,17 @@ records_list = [
     zone_id_shared = "Z005616523M0XVD03LD0M"
   },
   {
-    name = "dev.interaction.walletguru.co"
+    name = "dev.interaction.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "dev.mock.walletguru.co"
+    name = "dev.mock.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
   {
-    name = "dev.websocket.walletguru.co"
+    name = "dev.websocket.YOUR_DOMAIN"
     type = "CNAME"
     records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
   },
@@ -1152,7 +1153,7 @@ s3_buckets = [
 ]
 create_domain                  = true
 zone_id                        = "Z00522293EO3PH1CIDJ"
-email_configuration_source_arn = "arn:aws:ses:us-east-2:975050359999:identity/walletguru.co"
+email_configuration_source_arn = "arn:aws:ses:us-east-2:975050359999:identity/YOUR_DOMAIN"
 ```
 
 ### Envs
@@ -1170,14 +1171,14 @@ email_configuration_source_arn = "arn:aws:ses:us-east-2:975050359999:identity/wa
 | namespaces                     | List of namespace for create resources in kubernetes                                                                     | Set a list with nameserver for create in k8s                                                                                                                                                                                                                                                                                                                             | No       | ["local"]                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | repos_list                     | List of repositories create in ECR (elastic container registry)                                                          | Set a list with name of repositories for create in ECR                                                                                                                                                                                                                                                                                                                   | No       | ["backend-auth", "backend-notification", "frontend-admin", "backend-wallet","ws]                                                                                                                                                                                                                                                                                                                                                        |
 | microservices_list             | List of objects for create deployment, pods and service in kubernetes                                                    | Set a list with object configuration of microservices used in kubernetes. The name is the name of the name of the resource in k8s, the namespace is the namespace used for deploy the resoources, the image is the image used for deploy pods, the port and node_port is the port when microservice run, replicas is the number of replicas of you used,                 | No       | ```[{name = "backend-auth"namespace= "dev"image= "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-auth:development-latest"port = 3000replicas = 1node_port= 3000type_port= "ClusterIP"commands = []commands_job = []"var_envs" = []"var_envs_job" = []apply_migrations = false},]```                                                                                                                                               |
-| traefik_envs                   | List of subdomains used in your cluster                                                                                  | Set a list with object configuration of subdomains used in kubernetes, The domain is the subdomain used with your microservice, the namespace is the namespace used for deploy the resoource, service_name is the name of the service used for expose your microservice, the port is the port when microservice run, and traefik_name is the name used for this resource | No       | ```[{domain       = "dev.auth.walletguru.co" namespace    = "dev" service_name = "backend-auth" service_port = "3000" traefik_name = "auth"},```                                                                                                                                                                                                                                                                                        |
-| records_list                   | List of records in Route53 service of aws                                                                                | Set a list with object configuration of records of subdomains in route53 service of aws, the name is the subdomain name, type is the type of subdomain, records is the list of values for redirect subdomain                                                                                                                                                             | No       | ```[ { name = "dev.admin.walletguru.co" type = "CNAME" records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"] }, ]```                                                                                                                                                                                                                                                                                     |
+| traefik_envs                   | List of subdomains used in your cluster                                                                                  | Set a list with object configuration of subdomains used in kubernetes, The domain is the subdomain used with your microservice, the namespace is the namespace used for deploy the resoource, service_name is the name of the service used for expose your microservice, the port is the port when microservice run, and traefik_name is the name used for this resource | No       | ```[{domain       = "dev.auth.YOUR_DOMAIN" namespace    = "dev" service_name = "backend-auth" service_port = "3000" traefik_name = "auth"},```                                                                                                                                                                                                                                                                                        |
+| records_list                   | List of records in Route53 service of aws                                                                                | Set a list with object configuration of records of subdomains in route53 service of aws, the name is the subdomain name, type is the type of subdomain, records is the list of values for redirect subdomain                                                                                                                                                             | No       | ```[ { name = "dev.admin.YOUR_DOMAIN" type = "CNAME" records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"] }, ]```                                                                                                                                                                                                                                                                                     |
 | dynamo_tables                  | List of tables created in DynamoDb service of aws                                                                        | Set a list with object configuration of tables in DynamoDb, name is the name of table, billing_mode is the type of billing of the table, read_capacity and write_capacity is the capacity of the table for read and write objects                                                                                                                                        | No       | ```[ { name                        = "Attempts" billing_mode                = "PROVISIONED" read_capacity               = 5 write_capacity              = 5 hash_key                    = "Id" range_key                   = "" deletion_protection_enabled = true, attributes = [   {     name = "Id"     type = "S"   } ], ttl = [], global_secondary_index = [], tags = {   Name        = "Attempts"   Environment = "dev" } }, ]``` |
 | name_queue                     | Name of the queue used in SQS service of aws                                                                             | Set a name of SQS used for notification                                                                                                                                                                                                                                                                                                                                  | Yes      | paystreme-notifications-local                                                                                                                                                                                                                                                                                                                                                                                                           |
 | s3_buckets                     | List of names of buclkets created for save files                                                                         | Set a list with names of s3 buckets                                                                                                                                                                                                                                                                                                                                      | Yes      | ```{ name = "walletguru-dev"}]```                                                                                                                                                                                                                                                                                                                                                                                                       |
 | create_domain                  | Bool for create aws_route53_zone in route53 service                                                                      | Set true if you need create aws_route53_zone                                                                                                                                                                                                                                                                                                                             | Yes      | False                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | zone_id                        | Zone id of aws_route53_zone create                                                                                       | Set id of aws_route53_zone for send emails                                                                                                                                                                                                                                                                                                                               | Yes      | Z00522293EO3PH12345                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| email_configuration_source_arn | Id of ses for send emails                                                                                                | Set id of ses configuration for send emails                                                                                                                                                                                                                                                                                                                              | Yes      | arn:aws:ses:us-east-2:975050359999:identity/walletguru.co                                                                                                                                                                                                                                                                                                                                                                               |
+| email_configuration_source_arn | Id of ses for send emails                                                                                                | Set id of ses configuration for send emails                                                                                                                                                                                                                                                                                                                              | Yes      | arn:aws:ses:us-east-2:975050359999:identity/YOUR_DOMAIN                                                                                                                                                                                                                                                                                                                                                                               |
 
 Note: before run terraform commands, you need push of the image to ecr and create the secret in secret manager with
 the name **walletguru-local** and the key **.env** with you use in the microservices.

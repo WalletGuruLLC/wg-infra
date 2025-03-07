@@ -1,10 +1,10 @@
 # this envs are example, you need change it for your own envs
-aws_access_key        = "AKIAWNHTHA5CHHFZK3HW"
-aws_secret_key        = "gA9AU6ax3jeyKbneFAmt8iEBTXFvrQQaMmQuHYMg"
+aws_access_key        = "AKIAWNHTHA5..."
+aws_secret_key        = "gA9AU6ax3jey..."
 aws_region            = "us-east-2"
 aws_account_id        = "440744216388"
-aws_access_key_shared = "AKIAWNHTHA5CHHFZK3HW"
-aws_secret_key_shared = "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"
+aws_access_key_shared = "AKIAWNHTHA5..."
+aws_secret_key_shared = "gA9AU6ax3jey..."
 aws_region_shared     = "us-east-2"
 public_key            = "ssh-rsa AAAAB3NzaC1yc"
 namespaces = ["local"]
@@ -56,20 +56,6 @@ microservices_list = [
     name             = "backend-wallet"
     namespace        = "local"
     image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/backend-wallet:development-latest"
-    port             = 3000
-    replicas         = 1
-    node_port        = 3000
-    type_port        = "ClusterIP"
-    commands = []
-    commands_job = []
-    "var_envs" = []
-    "var_envs_job" = []
-    apply_migrations = false
-  },
-  {
-    name             = "backend-ws"
-    namespace        = "local"
-    image            = "975050359999.dkr.ecr.us-east-2.amazonaws.com/ws:development-latest"
     port             = 3000
     replicas         = 1
     node_port        = 3000

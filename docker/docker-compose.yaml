@@ -1,0 +1,42 @@
+services:
+  auth:
+    image: public.ecr.aws/m6h2e8f8/backend-auth:development-latest
+    ports:
+      - 3001:3000
+    env_file:
+      - .env_auth
+
+  notification:
+    image: public.ecr.aws/m6h2e8f8/backend-notification:development-latest
+    ports:
+      - 3002:3000
+    env_file:
+      - .env_notification
+
+  wallet:
+    image: public.ecr.aws/m6h2e8f8/backend-wallet:development-latest
+    ports:
+      - 3003:3000
+    env_file:
+      - .env_wallet
+
+  codes:
+    image: public.ecr.aws/m6h2e8f8/backend-codes:development-latest
+    ports:
+      - 3004:3000
+    env_file:
+      - .env_codes
+
+  countriesnow:
+    image: public.ecr.aws/m6h2e8f8/backend-countries-now:development-latest
+    ports:
+      - 3005:3000
+    env_file:
+      - .env_countriesnow
+
+  admin:
+    image: public.ecr.aws/m6h2e8f8/frontend-admin:development-latest
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000

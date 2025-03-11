@@ -190,66 +190,66 @@ module "repositories" {
 ##### NOTE comment this block if you are not created the cluster with the module eks
 
 # Uncomment the following block to create the cluster with the module eks
-#### kubernetes module
-module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "20.23.0"
-
-  cluster_name    = local.cluster_name
-  cluster_version = "1.31"
-
-  vpc_id                         = module.vpc.vpc_id
-  subnet_ids                     = module.vpc.private_subnets
-  cluster_endpoint_public_access = true
-
-  eks_managed_node_group_defaults = {
-    ami_type = "AL2_x86_64"
-
-  }
-
-  eks_managed_node_groups = {
-    one = {
-      name = "node-group-1"
-
-      instance_types = ["t3.large"]
-
-      min_size     = 1
-      max_size     = var.namespaces[0] == "dev" || var.namespaces[0] == "qa" ? 3 : 4
-      desired_size = var.namespaces[0] == "dev" || var.namespaces[0] == "qa" ? 3 : 3
-    }
-  }
-}
-#### kubernetes module
-
-#### create namespaces k8s
-resource "kubernetes_namespace" "resources_name" {
-  depends_on = [module.eks]
-  for_each = toset(keys({for i, r in var.namespaces :  i => r}))
-  metadata {
-    name = var.namespaces[each.value]
-  }
-}
-#### create namespaces k8s
-
-#### microservices
-module "microservices" {
-  depends_on = [module.eks, kubernetes_namespace.resources_name]
-  source           = "./modules/microservices"
-  for_each         = {for each in var.microservices_list : each.name => each}
-  name             = each.value.name
-  namespace        = each.value.namespace
-  port             = each.value.port
-  replicas         = each.value.replicas
-  var_envs         = each.value.var_envs
-  type_port        = each.value.type_port
-  node_port        = each.value.node_port
-  image            = each.value.image
-  commands         = each.value.commands
-  commands_job     = each.value.commands_job
-  var_envs_job     = each.value.var_envs_job
-  apply_migrations = each.value.apply_migrations
-}
-#### microservices
+# #### kubernetes module
+# module "eks" {
+#   source  = "terraform-aws-modules/eks/aws"
+#   version = "20.23.0"
+#
+#   cluster_name    = local.cluster_name
+#   cluster_version = "1.31"
+#
+#   vpc_id                         = module.vpc.vpc_id
+#   subnet_ids                     = module.vpc.private_subnets
+#   cluster_endpoint_public_access = true
+#
+#   eks_managed_node_group_defaults = {
+#     ami_type = "AL2_x86_64"
+#
+#   }
+#
+#   eks_managed_node_groups = {
+#     one = {
+#       name = "node-group-1"
+#
+#       instance_types = ["t3.large"]
+#
+#       min_size     = 1
+#       max_size     = var.namespaces[0] == "dev" || var.namespaces[0] == "qa" ? 3 : 4
+#       desired_size = var.namespaces[0] == "dev" || var.namespaces[0] == "qa" ? 3 : 3
+#     }
+#   }
+# }
+# #### kubernetes module
+#
+# #### create namespaces k8s
+# resource "kubernetes_namespace" "resources_name" {
+#   depends_on = [module.eks]
+#   for_each = toset(keys({for i, r in var.namespaces :  i => r}))
+#   metadata {
+#     name = var.namespaces[each.value]
+#   }
+# }
+# #### create namespaces k8s
+#
+# #### microservices
+# module "microservices" {
+#   depends_on = [module.eks, kubernetes_namespace.resources_name]
+#   source           = "./modules/microservices"
+#   for_each         = {for each in var.microservices_list : each.name => each}
+#   name             = each.value.name
+#   namespace        = each.value.namespace
+#   port             = each.value.port
+#   replicas         = each.value.replicas
+#   var_envs         = each.value.var_envs
+#   type_port        = each.value.type_port
+#   node_port        = each.value.node_port
+#   image            = each.value.image
+#   commands         = each.value.commands
+#   commands_job     = each.value.commands_job
+#   var_envs_job     = each.value.var_envs_job
+#   apply_migrations = each.value.apply_migrations
+# }
+# #### microservices
 
 ### renew ecr credentials
 # module "ecr_credentials" {

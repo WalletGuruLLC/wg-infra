@@ -3,257 +3,13 @@ aws_access_key        = "AKIA6GB..."
 aws_secret_key        = "GeAqIRagq9..."
 aws_region            = "us-east-2"
 aws_account_id        = "<ACCOUNT_NUMBER>"
-aws_access_key_shared = "AKIAQIJRSB2IJKGFXVAH"
-aws_secret_key_shared = "LlIK4Pe1F52Q..."
+aws_access_key_shared = "AKIA6GB..."
+aws_secret_key_shared = "GeAqIRagq9..."
 aws_region_shared     = "us-east-2"
 public_key            = "ssh-rsa AAAAB3NzaC1yc"
 namespaces = ["dev"]
-repos_list = ["backend-auth", "backend-notification", "frontend-admin", "backend-wallet"]
-microservices_list = [
-  {
-    name             = "backend-auth"
-    namespace        = "dev"
-    image            = "<ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/backend-auth:development-latest"
-    port             = 3000
-    replicas         = 1
-    node_port        = 3000
-    type_port        = "ClusterIP"
-    commands = []
-    commands_job = []
-    "var_envs" = []
-    "var_envs_job" = []
-    apply_migrations = false
-  },
-  {
-    name             = "backend-notification"
-    namespace        = "dev"
-    image            = "<ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/backend-notification:development-latest"
-    port             = 3000
-    replicas         = 1
-    node_port        = 3000
-    type_port        = "ClusterIP"
-    commands = []
-    commands_job = []
-    "var_envs" = []
-    "var_envs_job" = []
-    apply_migrations = false
-  },
-  {
-    name             = "frontend-admin"
-    namespace        = "dev"
-    image            = "<ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/frontend-admin:development-latest"
-    port             = 3000
-    replicas         = 1
-    node_port        = 3000
-    type_port        = "ClusterIP"
-    commands = []
-    commands_job = []
-    "var_envs" = []
-    "var_envs_job" = []
-    apply_migrations = false
-  },
-  {
-    name             = "backend-wallet"
-    namespace        = "dev"
-    image            = "<ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/backend-wallet:development-latest"
-    port             = 3000
-    replicas         = 1
-    node_port        = 3000
-    type_port        = "ClusterIP"
-    commands = []
-    commands_job = []
-    "var_envs" = []
-    "var_envs_job" = []
-    apply_migrations = false
-  },
-]
-traefik_envs = [
-  {
-    domain       = "dev.auth.YOUR_DOMAIN"
-    namespace    = "dev"
-    service_name = "backend-auth"
-    service_port = "3000"
-    traefik_name = "auth"
-  },
-  {
-    domain       = "dev.notification.YOUR_DOMAIN"
-    namespace    = "dev"
-    service_name = "backend-notification"
-    service_port = "3000"
-    traefik_name = "notification"
-  },
-  {
-    domain       = "dev.admin.YOUR_DOMAIN"
-    namespace    = "dev"
-    service_name = "frontend-admin"
-    service_port = "3000"
-    traefik_name = "admin"
-  },
-  {
-    domain       = "dev.wallet.YOUR_DOMAIN"
-    namespace    = "dev"
-    service_name = "backend-wallet"
-    service_port = "3000"
-    traefik_name = "wallet"
-  },
-  {
-    domain       = "dev.rafiki.YOUR_DOMAIN"
-    namespace    = "default"
-    service_name = "rafiki-rafiki-frontend"
-    service_port = "3010"
-    traefik_name = "rafiki-frontend"
-  },
-  {
-    domain       = "dev.graphql.YOUR_DOMAIN"
-    namespace    = "default"
-    service_name = "rafiki-rafiki-backend"
-    service_port = "3001"
-    traefik_name = "graphql-backend"
-  },
-  {
-    domain       = "dev.rafiki-auth.YOUR_DOMAIN"
-    namespace    = "default"
-    service_name = "rafiki-rafiki-auth"
-    service_port = "3006"
-    traefik_name = "rafiki-auth"
-  },
-  {
-    domain       = "dev.YOUR_DOMAIN"
-    namespace    = "default"
-    service_name = "rafiki-rafiki-backend"
-    service_port = "80"
-    traefik_name = "rafiki-open-payments"
-  },
-  {
-    domain       = "dev.interaction.YOUR_DOMAIN"
-    namespace    = "default"
-    service_name = "rafiki-rafiki-auth"
-    service_port = "3009"
-    traefik_name = "rafiki-interaction"
-  },
-  {
-    domain       = "dev.mock.YOUR_DOMAIN"
-    namespace    = "default"
-    service_name = "rafiki-rafiki-mock"
-    service_port = "3030"
-    traefik_name = "rafiki-mock"
-  },
-  {
-    domain       = "dev.websocket.YOUR_DOMAIN"
-    namespace    = "dev"
-    service_name = "backend-ws"
-    service_port = "3000"
-    traefik_name = "ws"
-  }
-]
-records_list = [
-  {
-    name = "dev.admin.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.auth.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.notification.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "vftimymc7xgnksuvqe7glwbcfjvutsz7._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["vftimymc7xgnksuvqe7glwbcfjvutsz7.dkim.amazonses.com"]
-  },
-  {
-    name = "ugcymohpz7tvyjr5zcsymxsamw55stib._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["ugcymohpz7tvyjr5zcsymxsamw55stib.dkim.amazonses.com"]
-  },
-  {
-    name = "shm3eq3wwx3ivumsiyfflual6qcl67yj._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["shm3eq3wwx3ivumsiyfflual6qcl67yj.dkim.amazonses.com"]
-  },
-  {
-    name = "_dmarc.YOUR_DOMAIN"
-    type = "TXT"
-    records = ["v=DMARC1; p=none;"]
-  },
-  {
-    name = "dev.wallet.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "44mh5smaunivxhr63elcbyi57l7l4lwi._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["44mh5smaunivxhr63elcbyi57l7l4lwi.dkim.amazonses.com"]
-  },
-  {
-    name = "czzabqsuluhcffeu4jwnvmxoe3gwobls._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["czzabqsuluhcffeu4jwnvmxoe3gwobls.dkim.amazonses.com"]
-  },
-  {
-    name = "o5v7iuqf6dvyv23b6qwlav3yhrhnqd36._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["o5v7iuqf6dvyv23b6qwlav3yhrhnqd36.dkim.amazonses.com"]
-  },
-  {
-    name = "42m4w6dscge274szhjoq2u5noc3bdyzx._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["42m4w6dscge274szhjoq2u5noc3bdyzx.dkim.amazonses.com"]
-  },
-  {
-    name = "eicaqbslgkarw4ip4drlikgliva6qahj._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["eicaqbslgkarw4ip4drlikgliva6qahj.dkim.amazonses.com"]
-  },
-  {
-    name = "5ktwxsaan2cfxvfhv4t5mq525n4v24qj._domainkey.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["5ktwxsaan2cfxvfhv4t5mq525n4v24qj.dkim.amazonses.com"]
-  },
-  {
-    name = "dev.rafiki.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.graphql.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.rafiki-auth.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-    zone_id_shared = "Z005616523M0XVD03LD0M"
-  },
-  {
-    name = "dev.interaction.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.mock.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-  {
-    name = "dev.websocket.YOUR_DOMAIN"
-    type = "CNAME"
-    records = ["a19ddf081adf74c94978f8903bc54031-411375565.us-east-2.elb.amazonaws.com"]
-  },
-
+repos_list = [
+  "backend-auth", "backend-notification", "frontend-admin", "backend-wallet", "backend-codes", "backend-countries-now"
 ]
 dynamo_tables = [
   {
@@ -651,7 +407,7 @@ dynamo_tables = [
         read_capacity   = 5
         projection_type = "ALL"
         non_key_attributes = []
-      },{
+      }, {
         name            = "IntervalIndex"
         hash_key        = "Interval"
         range_key       = ""
@@ -1058,15 +814,15 @@ dynamo_tables = [
     ],
     ttl = [],
     global_secondary_index = [
-        {
-            name            = "ServiceProviderIdIndex"
-            hash_key        = "ServiceProviderId"
-            range_key       = ""
-            write_capacity  = 5
-            read_capacity   = 5
-            projection_type = "ALL"
-            non_key_attributes = []
-        }
+      {
+        name            = "ServiceProviderIdIndex"
+        hash_key        = "ServiceProviderId"
+        range_key       = ""
+        write_capacity  = 5
+        read_capacity   = 5
+        projection_type = "ALL"
+        non_key_attributes = []
+      }
     ],
     tags = {
       Name        = "ClearPayments"
@@ -1093,15 +849,15 @@ dynamo_tables = [
     ],
     ttl = [],
     global_secondary_index = [
-        {
-            name            = "ServiceProviderIdIndex"
-            hash_key        = "ServiceProviderId"
-            range_key       = ""
-            write_capacity  = 5
-            read_capacity   = 5
-            projection_type = "ALL"
-            non_key_attributes = []
-        }
+      {
+        name            = "ServiceProviderIdIndex"
+        hash_key        = "ServiceProviderId"
+        range_key       = ""
+        write_capacity  = 5
+        read_capacity   = 5
+        projection_type = "ALL"
+        non_key_attributes = []
+      }
     ],
     tags = {
       Name        = "Refunds"

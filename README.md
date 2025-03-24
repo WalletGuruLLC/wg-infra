@@ -42,12 +42,13 @@ Note: before running terraform commands, you need create the secret in secret ma
 
 | **Microservice**                                | **Repository URL**                                               |
 |-------------------------------------------------|------------------------------------------------------------------|
-| Authentication Service (`backend-auth`)         | [GitHub Repo](https://github.com/WalletGuruLLC/backend-auth)     |
-| Notification Service (`backend-notification`)   | [GitHub Repo](https://github.com/your-org/backend-notification)  |
-| Admin Frontend (`frontend-admin`)               | [GitHub Repo](https://github.com/WalletGuruLLC/frontend-admin)   |
-| Wallet Service (`backend-wallet`)               | [GitHub Repo](https://github.com/WalletGuruLLC/backend-wallet)   |
-| Countries Now Service (`backend-countries-now`) | [GitHub Repo](https://github.com/ErgonStreamGH/wg-countries-now) |
-| Codes Service (`backend-codes`)                 | [GitHub Repo](https://github.com/ErgonStreamGH/wg-backend-codes) |
+| Authentication Service (`backend-auth`)         | [GitHub Repo](https://github.com/WalletGuruLLC/wg-backend-auth)     |
+| Notification Service (`backend-notification`)   | [GitHub Repo](https://github.com/WalletGuruLLC/wg-backend-notification)  |
+| Admin Frontend (`frontend-admin`)               | [GitHub Repo](https://github.com/WalletGuruLLC/wg-frontend)   |
+| Wallet Service (`backend-wallet`)               | [GitHub Repo](https://github.com/WalletGuruLLC/wg-backend-wallet)   |
+| Countries Now Service (`backend-countries-now`) | [GitHub Repo](https://github.com/WalletGuruLLC/wg-countries-now) |
+| Codes Service (`backend-codes`)                 | [GitHub Repo](https://github.com/WalletGuruLLC/wg-backend-codes) |
+| Cron Service (`backend-codes`)                  | [GitHub Repo](https://github.com/WalletGuruLLC/wg-cron) |
 
 4. Run the following commands:
 
